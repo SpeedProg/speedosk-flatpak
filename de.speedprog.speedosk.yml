@@ -1,0 +1,74 @@
+app-id: de.speedprog.speedosk
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: speedosk
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=all
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/pkgconfig
+  - /man
+  - /share/man
+  - /lib/*.la
+  - /lib/*.a
+modules:
+  - name: SDL2
+    rm-configure: true
+    config-opts:
+      - --disable-static
+    buildsystem: autotools
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL
+        tag: release-2.24.0
+        commit: 8c9beb0c873f6ca5efbd88f1ad2648bfc793b2ac
+    modules:
+      - name: libdecor
+        config-opts:
+          - -Ddemo=false
+        buildsystem: meson
+        cleanup:
+          - /include
+          - /lib/pkgconfig
+        sources:
+          - type: git
+            url: https://gitlab.gnome.org/jadahl/libdecor/
+            commit: a5e1d87dc80d8a71076f64d0fc33f38cc0fc205a
+
+  - name: SDL_ttf
+    buildsystem: autotools
+    rm-configure: true
+    config-opts:
+      - --disable-static
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL_ttf
+        tag: release-2.20.1
+        commit: 0a652b598625d16ea7016665095cb1e9bce9ef4f
+  - name: speedprog-osk
+    buildsystem: cmake
+    config-opts:
+      - -DCMAKE_INSTALL_PREFIX=/app
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_LIBRARY_PATH=/app/lib
+    sources:
+      - type: archive
+        path: speedosk.zip
+        sha256: 7d4301c8788408c3dadc14866bac48f911b01c6c5e4debae35d812a5947417ee
+        strip-components: 0

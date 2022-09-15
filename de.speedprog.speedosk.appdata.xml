@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2022 SpeedProg -->
+<component type="desktop-application">
+	<id>de.speedprog.speedosk</id>>
+	<developer_name>SpeedProg</developer_name>
+	<launchable type="desktop-id">de.speedprog.speedosk.desktop</launchable>
+	<content_rating type="oars-1.1" />
+	<name>SpeedOSK</name>
+	<summary>Simple virtual keyboard for controllers</summary>
+	<description><p>Simple virtual keyboard based on danzeffs keyboard</p></description>
+	<keywords>
+		<keyword>SpeedOSK</keyword>
+		<keyword>Virtual Keyboard</keyword>
+		<keyword>Controller</keyword>
+		<keyword>SpeedProg</keyword>
+	</keywords>
+	<provides><id>de.speedprog.speedosk</id></provides>
+	<project_license>GPL-3.0</project_license>
+	<metadata_license>CC0-1.0</metadata_license>
+	<categories>
+		<category>Utility</category>
+		<category>Accessibility</category>
+	</categories>
+</component>
